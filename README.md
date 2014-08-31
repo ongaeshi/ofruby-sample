@@ -14,5 +14,5 @@ Draw stripes. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/stri
 ## mountain.rb
 Mountain animation. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/mountain.rb)
 
-![mountain.gif](https://raw.github.com/ongaeshi/ofruby-sample/master/images/mountain.png)
+![mountain.gif](https://raw.github.com/ongaeshi/ofruby-sample/master/images/mountain.gif)
 
