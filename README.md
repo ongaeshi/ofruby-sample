@@ -11,3 +11,8 @@ Draw stripes. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/stri
 
 ![stripe.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/stripe.png)
 
+## moutain.rb
+Mountain animation. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/moutain.rb)
+
+![moutain.gif](https://raw.github.com/ongaeshi/ofruby-sample/master/images/moutain.png)
+
