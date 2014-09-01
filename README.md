@@ -6,6 +6,11 @@ Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello
 
 ![hello.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/hello.png)
 
+## lines.rb
+Draw lines. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/lines.rb)
+
+![lines.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/lines.png)
+
 ## stripe.rb
 Draw stripes. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/stripe.rb)
 
