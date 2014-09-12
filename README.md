@@ -21,3 +21,8 @@ Mountain animation. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/maste
 
 ![mountain.gif](https://raw.github.com/ongaeshi/ofruby-sample/master/images/mountain.gif)
 
+## touch_fall.rb
+Balls falls when you touch the screen. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/touch_fall.rb)
+
+![touch_fall.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/touch_fall.png)
+
