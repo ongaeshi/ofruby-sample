@@ -26,3 +26,12 @@ Balls falls when you touch the screen. [[src]](https://github.com/ongaeshi/ofrub
 
 ![touch_fall.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/touch_fall.png)
 
+## wave_clock.rb
+Wave Clock. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/wave_clock.rb)
+
+![wave_clock.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/wave_clock.png)
+
+ref: [GENERATIVE ART](http://zenbullets.com/book.php)
+
+
+
