@@ -33,5 +33,10 @@ Wave Clock. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/wave_c
 
 ref: [GENERATIVE ART](http://zenbullets.com/book.php)
 
+## breakout.rb
+Wave Clock. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/breakout.rb)
+
+![breakout.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/breakout.png)
+
 
 
