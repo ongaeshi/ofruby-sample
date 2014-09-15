@@ -1,3 +1,5 @@
+NUM = 1
+
 def setup
   @balls = []
   @prev = false
@@ -6,7 +8,13 @@ end
 def update
   ta = Input.touches.find_all { |e| e.release? }
   ta.each do |t|
-    @balls.push Ball.new t.x, t.y, 0
+    1.step NUM do |i|
+      if i == 1
+        @balls.push Ball.new t.x, t.y, 0
+      else
+        @balls.push Ball.new t.x + rand(100) - 50, t.y + rand(100) - 50, 0
+      end
+    end
   end
   @balls.each { |v| v.update }
 end
