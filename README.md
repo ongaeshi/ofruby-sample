@@ -1,7 +1,10 @@
 ofruby Sample Code
 ===============
 
-## 00: hello.rbg
+- [00: hello.rb](#00-hellorb)
+- [01: lines.rb](#01-linesrb)
+
+## 00: hello.rb
 Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello.rb)
 
 ![hello.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/hello.png)
