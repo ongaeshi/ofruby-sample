@@ -5,8 +5,8 @@ ofruby Sample Code
 - [01: Lines](#01-lines)
 - [02: Stripe](#02-stripe)
 - [03: Mountain](#03-mountain)
-- [04: Touch Fall](#04-touch_fall)
-- [05: Wave Clock](#05-wave_clock)
+- [04: Touch Fall](#04-touch-fall)
+- [05: Wave Clock](#05-wave-clock)
 - [06: Breakout](#06-breakout)
 
 ## 00: Hello
