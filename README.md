@@ -8,6 +8,7 @@ ofruby Sample Code
 - [04: Touch Fall](#04-touch-fall)
 - [05: Wave Clock](#05-wave-clock)
 - [06: Breakout](#06-breakout)
+- [07: Random Bound](#07-random-bound)
 
 ## 00: Hello
 Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello.rb)
@@ -46,6 +47,10 @@ Breakout. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/breakout
 
 ![breakout.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/breakout.png) 
 
+## 07: Random Bound
+Bounding balls. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/random_bound.rb)
+
+![random_bound.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/random_bound.png) 
 
 
 
