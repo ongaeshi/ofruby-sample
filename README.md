@@ -29,14 +29,15 @@ Balls falls when you touch the screen. [[src]](https://github.com/ongaeshi/ofrub
 ## wave_clock.rb
 Wave Clock. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/wave_clock.rb)
 
-<img src="https://raw.github.com/ongaeshi/ofruby-sample/master/images/wave_clock.png" alt="wave_clock.png" style="border: 1px #c0c0c0 solid;"/>
+![wave_clock.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/wave_clock.png) 
 
 ref: [GENERATIVE ART](http://zenbullets.com/book.php)
 
 ## breakout.rb
 Breakout. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/breakout.rb)
 
-<img src="https://raw.github.com/ongaeshi/ofruby-sample/master/images/breakout.png" alt="breakout.png" style="border: 1px #c0c0c0 solid;"/>
+![breakout.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/breakout.png) 
+
 
 
 
