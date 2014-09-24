@@ -9,6 +9,7 @@ ofruby Sample Code
 - [05: Wave Clock](#05-wave-clock)
 - [06: Breakout](#06-breakout)
 - [07: Random Bound](#07-random-bound)
+- [08: Text Board](#08-text-board)
 
 ## 00: Hello
 Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello.rb)
@@ -51,6 +52,11 @@ Breakout. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/breakout
 Bounding balls. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/random_bound.rb)
 
 ![random_bound.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/random_bound.png) 
+
+## 08: Text Board
+Any text will scroll from left to right. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/text_board.rb)
+
+![text_board.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/text_board.png)
 
 
 
