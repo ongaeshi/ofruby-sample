@@ -1,17 +1,14 @@
 def setup
+  set_background_hex 0x000000
+
   @updater = []
   
   @player = Player.new
   @updater << @player
 
-  @updater << Obstacle.new
-  @updater << Obstacle.new
-  @updater << Obstacle.new
-  @updater << Obstacle.new
-  @updater << Obstacle.new
-  @updater << Obstacle.new
-  @updater << Obstacle.new
-  @updater << Obstacle.new
+  1.step(8) do
+    @updater << Obstacle.new
+  end
 end
 
 def update
@@ -51,7 +48,7 @@ class Obstacle
   def initialize
     @x = width + 100
     @y = rand(height)
-    @speed_x = -rand(10)
+    @speed_x = -2
     @radius = rand(50)
   end
   
@@ -60,7 +57,7 @@ class Obstacle
   end
   
   def draw
-    set_color_hex 0xF5F5F5
+    set_color_hex 0xF0CC3A
     circle @x, @y, @radius
   end
 end
