@@ -107,27 +107,27 @@ class Panel
     kind == rhs.kind
   end  
 
-   def vanish
-      @vanished = true
-   end
+  def vanish
+    @vanished = true
+  end
 
-    def vanished?
-      @vanished
-    end
+  def vanished?
+    @vanished
+  end
 
-    def blank(frame)
-      if @vanished
-        @hide = !@hide if frame % 3 == 0
-      end
+  def blank(frame)
+    if @vanished
+      @hide = !@hide if frame % 3 == 0
     end
+  end
 
-    def new_panel
-      if @vanished
-        @kind = rand(6).to_i
-        @vanished = nil
-        @hide = false
-      end
+  def new_panel
+    if @vanished
+      @kind = rand(6).to_i
+      @vanished = nil
+      @hide = false
     end
+  end
 end
 
 class Field
@@ -201,12 +201,12 @@ class Field
 
     @table.each { |e| e.new_panel } 
 
-     if vanish_all
+    if vanish_all
       @mode = :blank
       @frame = 0
-     else
-       @mode = :touch
-     end
+    else
+      @mode = :touch
+    end
   end
 
   def get(x, y)
@@ -214,7 +214,7 @@ class Field
   end
 
   def draw
-   0.upto(@size.x-1) do |x|
+    0.upto(@size.x-1) do |x|
       0.upto(@size.y-1) do |y|
         get(x, y).draw(sx + x * PX, sy + y * PY)
       end
@@ -240,7 +240,7 @@ class Field
 
   def find_panel(t)
     if sx < t.x && t.x < sx + PX * X &&
-       sy < t.y && t.y < sy + PY * Y
+        sy < t.y && t.y < sy + PY * Y
       x = ((t.x - sx) / PX).to_i
       y = ((t.y - sy) / PY).to_i
       Vec2.new(x, y)
