@@ -2,6 +2,9 @@ X = 6; Y = 6
 PX = 40; PY = 40
 PXH = PX * 0.5; PYH = PY * 0.5
 
+TARGET_POINT = 30
+TARGET_RATE = 1.15
+
 def setup
   @field = Field.new(X,Y)
   @info = Info.new
@@ -21,9 +24,9 @@ end
 
 class Info
   def initialize
-    @score = @next_score = 0
-    @level = 1
-    update_next_score
+    @score = @next_score = @level = 0
+    @target_point = TARGET_POINT
+    level_up
   end
 
   def update
@@ -36,7 +39,7 @@ class Info
 
     set_color_hex 0x88f088
     set_fill
-    rate = (@score - @prev_score) / (@next_score - @prev_score).to_f
+    rate = 1.0 - (@next_score - @score) / (@target_point).to_f
     rect 30, 80, rate * 250, 30
 
     set_color_hex 0
@@ -47,18 +50,16 @@ class Info
 
   def add_score(score)
     @score += score
-
-    if @score >= @next_score
-      @level += 1
-      update_next_score
-    end
+    level_up if @score >= @next_score
   end
 
   private
 
-  def update_next_score
-    @prev_score = @next_score
-    @next_score = (@next_score + 30) * 1.2
+  def level_up
+    @level += 1
+    @target_point *= TARGET_RATE if @level > 1
+    @next_score += @target_point
+    Debugp.p @next_score
   end
 end
 
