@@ -27,9 +27,12 @@ class Info
     @score = @next_score = @level = 0
     @target_point = TARGET_POINT
     level_up
+    @score_infos = []
   end
 
   def update
+    @score_infos.each { |e| e.update }
+    @score_infos = @score_infos.find_all { |e| !e.dead? }
   end
 
   def draw
@@ -46,10 +49,13 @@ class Info
     set_line_width 3
     set_no_fill
     rect 30, 80, 250, 30
+
+    @score_infos.each { |e| e.draw }
   end
 
   def add_score(score)
     @score += score
+    @score_infos << ScoreInfo.new("#{score*100}!", 120, 60, 0x0)
     level_up if @score >= @next_score
   end
 
@@ -59,7 +65,34 @@ class Info
     @level += 1
     @target_point *= TARGET_RATE if @level > 1
     @next_score += @target_point
-    Debugp.p @next_score
+    # Debugp.p @next_score
+  end
+end
+
+class ScoreInfo
+  def initialize(msg, x, y, color)
+    @msg = msg
+    @pos = Vec2.new(x, y)
+    @color = color
+    @lifetime = 40
+  end
+
+  def update
+    @lifetime -= 1 if @lifetime > 0
+  end
+
+  def draw
+    set_color_hex @color
+
+    push_matrix do
+      translate @pos.x, @pos.y
+      scale 4, 4
+      text @msg, 0, 0
+    end
+  end
+
+  def dead?
+    @lifetime == 0
   end
 end
 
