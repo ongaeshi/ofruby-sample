@@ -29,108 +29,6 @@ def draw
   Debugp.draw
 end
 
-class ResetButton
-  def initialize(field)
-    @pos = Vec2.new(170, 20)
-    @size = Vec2.new(90, 30)
-    @field = field
-  end
-
-  def update
-    t = Input.touch(0)
-    if t.press?
-      if @pos.x <= t.x && t.x <= @pos.x + @size.x &&
-         @pos.y <= t.y && t.y <= @pos.y + @size.y
-        @field.reset
-      end
-    end
-  end
-
-  def draw
-    set_color_hex 0x0
-    set_line_width 1
-    text "Reset #{@field.reset_remain}", @pos.x + 15, @pos.y + 20
-    rect_rounded @pos.x, @pos.y, @size.x, @size.y, 10
-  end
-end
-
-class Info
-  attr_reader :level
-
-  def initialize
-    @score = @next_score = @level = 0
-    @target_point = TARGET_POINT
-    level_up
-    @score_infos = []
-  end
-
-  def update
-    @score_infos.each { |e| e.update }
-    @score_infos = @score_infos.find_all { |e| !e.dead? }
-  end
-
-  def draw
-    set_color_hex 0x0
-    text "Level: #{@level}", 30, 30
-    text "Score: #{@score}", 30, 50
-
-    set_color_hex 0x88f088
-    set_fill
-    rate = 1.0 - (@next_score - @score) / (@target_point).to_f
-    rect 30, 80, rate * 250, 30
-
-    set_color_hex 0
-    set_line_width 3
-    set_no_fill
-    rect 30, 80, 250, 30
-
-    @score_infos.each { |e| e.draw }
-  end
-
-  def add_score(score)
-    @score += score
-    @score_infos << ScoreInfo.new("#{score}!", 120, 60, 0x0)
-    level_up if @score >= @next_score
-  end
-
-  private
-
-  def level_up
-    @level += 1
-    @target_point *= TARGET_RATE if @level > 1
-    @next_score += @target_point
-    @score_infos << ScoreInfo.new("Level Up!", 30, 120, 0x0) if @level > 1
-    # Debugp.p @next_score
-  end
-end
-
-class ScoreInfo
-  def initialize(msg, x, y, color)
-    @msg = msg
-    @pos = Vec2.new(x, y)
-    @color = color
-    @lifetime = 40
-  end
-
-  def update
-    @lifetime -= 1 if @lifetime > 0
-  end
-
-  def draw
-    set_color_hex @color
-
-    push_matrix do
-      translate @pos.x, @pos.y
-      scale 4, 4
-      text @msg, 0, 0
-    end
-  end
-
-  def dead?
-    @lifetime == 0
-  end
-end
-
 class Panel
   attr_reader :kind
 
@@ -475,6 +373,108 @@ class Field
     end
 
     vanished
+  end
+end
+
+class Info
+  attr_reader :level
+
+  def initialize
+    @score = @next_score = @level = 0
+    @target_point = TARGET_POINT
+    level_up
+    @score_infos = []
+  end
+
+  def update
+    @score_infos.each { |e| e.update }
+    @score_infos = @score_infos.find_all { |e| !e.dead? }
+  end
+
+  def draw
+    set_color_hex 0x0
+    text "Level: #{@level}", 30, 30
+    text "Score: #{@score}", 30, 50
+
+    set_color_hex 0x88f088
+    set_fill
+    rate = 1.0 - (@next_score - @score) / (@target_point).to_f
+    rect 30, 80, rate * 250, 30
+
+    set_color_hex 0
+    set_line_width 3
+    set_no_fill
+    rect 30, 80, 250, 30
+
+    @score_infos.each { |e| e.draw }
+  end
+
+  def add_score(score)
+    @score += score
+    @score_infos << ScoreInfo.new("#{score}!", 120, 60, 0x0)
+    level_up if @score >= @next_score
+  end
+
+  private
+
+  def level_up
+    @level += 1
+    @target_point *= TARGET_RATE if @level > 1
+    @next_score += @target_point
+    @score_infos << ScoreInfo.new("Level Up!", 30, 120, 0x0) if @level > 1
+    # Debugp.p @next_score
+  end
+end
+
+class ScoreInfo
+  def initialize(msg, x, y, color)
+    @msg = msg
+    @pos = Vec2.new(x, y)
+    @color = color
+    @lifetime = 40
+  end
+
+  def update
+    @lifetime -= 1 if @lifetime > 0
+  end
+
+  def draw
+    set_color_hex @color
+
+    push_matrix do
+      translate @pos.x, @pos.y
+      scale 4, 4
+      text @msg, 0, 0
+    end
+  end
+
+  def dead?
+    @lifetime == 0
+  end
+end
+
+class ResetButton
+  def initialize(field)
+    @pos = Vec2.new(170, 20)
+    @size = Vec2.new(90, 30)
+    @field = field
+  end
+
+  def update
+    t = Input.touch(0)
+    if t.press?
+      if @pos.x <= t.x && t.x <= @pos.x + @size.x &&
+         @pos.y <= t.y && t.y <= @pos.y + @size.y
+        @field.reset
+      end
+    end
+  end
+
+  def draw
+    set_color_hex 0x0
+    set_line_width 1
+    text "Reset #{@field.reset_remain}", @pos.x + 15, @pos.y + 20
+    rect_rounded @pos.x, @pos.y, @size.x, @size.y, 10
   end
 end
 
