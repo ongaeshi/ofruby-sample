@@ -10,7 +10,7 @@ ofruby Sample Code
 - [06: Breakout](#06-breakout)
 - [07: Random Bound](#07-random-bound)
 - [08: Text Board](#08-text-board)
-- [09: Match3 Game](#09-match3)
+- [09: Match3 Game](#09-match3-game)
 
 ## 00: Hello
 Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello.rb)
