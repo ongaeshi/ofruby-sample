@@ -2,27 +2,61 @@ X = 6; Y = 6
 PX = 40; PY = 40
 PXH = PX * 0.5; PYH = PY * 0.5
 
-TARGET_POINT = 30
-TARGET_RATE = 1.15
+FIRST_KIND = 6
+
+TARGET_POINT = 3000
+TARGET_RATE = 1.0
+BASE_RATE = 1.2
+CHAIN_RATE = 1.2
 
 def setup
   @field = Field.new(X,Y)
   @info = Info.new
   @field.set_info(@info)
+  @reset = ResetButton.new(@field)
 end
 
 def update
   @field.update
   @info.update
+  @reset.update
 end
 
 def draw
   @field.draw
   @info.draw
+  @reset.draw
   Debugp.draw
 end
 
+class ResetButton
+  def initialize(field)
+    @pos = Vec2.new(170, 20)
+    @size = Vec2.new(90, 30)
+    @field = field
+  end
+
+  def update
+    t = Input.touch(0)
+    if t.press?
+      if @pos.x <= t.x && t.x <= @pos.x + @size.x &&
+         @pos.y <= t.y && t.y <= @pos.y + @size.y
+        @field.reset
+      end
+    end
+  end
+
+  def draw
+    set_color_hex 0x0
+    set_line_width 1
+    text "Reset #{@field.reset_remain}", @pos.x + 15, @pos.y + 20
+    rect_rounded @pos.x, @pos.y, @size.x, @size.y, 10
+  end
+end
+
 class Info
+  attr_reader :level
+
   def initialize
     @score = @next_score = @level = 0
     @target_point = TARGET_POINT
@@ -55,7 +89,7 @@ class Info
 
   def add_score(score)
     @score += score
-    @score_infos << ScoreInfo.new("#{score*100}!", 120, 60, 0x0)
+    @score_infos << ScoreInfo.new("#{score}!", 120, 60, 0x0)
     level_up if @score >= @next_score
   end
 
@@ -65,6 +99,7 @@ class Info
     @level += 1
     @target_point *= TARGET_RATE if @level > 1
     @next_score += @target_point
+    @score_infos << ScoreInfo.new("Level Up!", 30, 120, 0x0) if @level > 1
     # Debugp.p @next_score
   end
 end
@@ -134,6 +169,14 @@ class Panel
       set_color_hex 0xfff842
       set_fill
       rect_rounded x+1, y+1, PX-1, PY-1, 10
+    when 6
+      set_color_hex 0xFF4A8E
+      set_fill
+      circle x + PXH, y + PYH, PXH
+    when 7
+      set_color_hex 0x00343e
+      set_fill
+      triangle x + PXH, y, x + PX, y + PY, x, y + PY
     end
   end  
 
@@ -155,20 +198,30 @@ class Panel
     end
   end
 
-  def new_panel
-    if @vanished
-      @kind = rand(6).to_i
+  def hide
+    @hide = true if @vanished
+  end
+
+  def new_panel(kind)
+    reset_panel(kind) if @vanished
+  end
+
+  def reset_panel(kind)
+      @kind = rand(kind).to_i
       @vanished = nil
       @hide = false
-    end
   end
 end
 
 class Field
+  attr_reader :reset_remain
+
   def initialize(x, y)
+    @kind = FIRST_KIND
     @size = Vec2.new(x, y)
-    @table = Array.new(x * y) { Panel.new(rand(6).to_i) }
+    @table = Array.new(x * y) { Panel.new(rand(@kind).to_i) }
     @mode = :touch
+    @reset_remain = 3
   end
 
   def set_info(info)
@@ -183,6 +236,8 @@ class Field
       update_blank
     when :fall
       update_fall
+    when :new_panel
+      update_new_panel
     end
   end
 
@@ -192,10 +247,15 @@ class Field
       pos = find_panel(t)
       if pos
         if @cursor
+          unless swap?(pos, @cursor)
+            @cursor = nil
+            return
+          end
           swap(pos, @cursor)
           if vanish_all
             @mode = :blank
             @frame = 0
+            @chain = 1
           else
             swap(@cursor, pos)
           end
@@ -209,38 +269,76 @@ class Field
 
   def update_blank
     if @frame == 0
-      score = @table.reduce(0) { |t, e| e.vanished? ? t + 1 : t }
+      vanish_num =  @table.reduce(0) { |t, e| e.vanished? ? t + 1 : t }
+      score = calculate_score(vanish_num, @chain)
       @info.add_score(score)
+      if @info.level >= 10
+        @kind = 8
+      elsif @info.level >= 5
+        @kind = 7
+      end
     end
     @table.each { |e| e.blank(@frame) }
     @frame += 1
     if @frame > 40
       @mode = :fall
       @frame = 0
+      @table.each { |e| e.hide }
     end
   end
 
+  def calculate_score(vanish_num, chain)
+      score = 0
+
+      chain_rate = 1.0
+      2.upto(chain) do
+        chain_rate *= CHAIN_RATE
+      end
+      
+      base_score = 100
+      1.upto(vanish_num) do |e|
+        base_score *= BASE_RATE if e > 3
+        score += (base_score * chain_rate / 10).to_i * 10
+      end
+      score
+  end
+
   def update_fall
-    0.upto(X-1) do |x|
-      (Y-2).downto(0) do |y|
-        if get(x, y+1).vanished?
-          (y+1).upto(Y-1) do |yy|
-            if get(x, yy).vanished?
-              swap(Vec2.new(x, yy-1), Vec2.new(x, yy))
+    @frame += 1
+    if @frame > 10
+      @frame = 0
+      @mode = :new_panel
+    end
+  end
+
+  def update_new_panel
+      if @frame == 0
+      0.upto(X-1) do |x|
+        (Y-2).downto(0) do |y|
+          if get(x, y+1).vanished?
+            (y+1).upto(Y-1) do |yy|
+              if get(x, yy).vanished?
+                swap(Vec2.new(x, yy-1), Vec2.new(x, yy))
+              end
             end
           end
         end
       end
-    end
 
-    @table.each { |e| e.new_panel } 
+    @table.each { |e| e.new_panel(@kind) } 
 
+    elsif @frame > 5
     if vanish_all
       @mode = :blank
       @frame = 0
+      @chain += 1
     else
       @mode = :touch
+      @chain = 0
     end
+    end
+
+    @frame += 1
   end
 
   def get(x, y)
@@ -259,6 +357,13 @@ class Field
       set_no_fill
       set_line_width(5)
       rect sx + @cursor.x * PX, sy + @cursor.y * PY, PX, PY
+    end
+  end
+
+  def reset
+    if @reset_remain > 0
+      @table.each { |e| e.reset_panel(@kind) } 
+      @reset_remain -= 1
     end
   end
 
@@ -291,6 +396,15 @@ class Field
     tmp = get(a.x, a.y)
     set(a.x, a.y, get(b.x, b.y))
     set(b.x, b.y, tmp)
+  end
+
+  def swap?(a, b)
+    abs(a.x - b.x) <= 1 && abs(a.y - b.y) <= 0 ||
+    abs(a.x - b.x) <= 0 && abs(a.y - b.y) <= 1
+  end
+
+  def abs(v)
+    v >= 0 ? v : -v
   end
 
   def vanish_all
