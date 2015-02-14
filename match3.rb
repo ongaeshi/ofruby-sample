@@ -178,11 +178,11 @@ class Panel
       set_fill
       triangle x + PXH, y, x + PX, y + PY, x, y + PY
     end
-  end  
+  end
 
   def ==(rhs)
     kind == rhs.kind
-  end  
+  end
 
   def vanish
     @vanished = true
@@ -294,7 +294,7 @@ class Field
       2.upto(chain) do
         chain_rate *= CHAIN_RATE
       end
-      
+
       base_score = 100
       1.upto(vanish_num) do |e|
         base_score *= BASE_RATE if e > 3
@@ -325,7 +325,7 @@ class Field
         end
       end
 
-    @table.each { |e| e.new_panel(@kind) } 
+    @table.each { |e| e.new_panel(@kind) }
 
     elsif @frame > 5
     if vanish_all
@@ -362,7 +362,7 @@ class Field
 
   def reset
     if @reset_remain > 0
-      @table.each { |e| e.reset_panel(@kind) } 
+      @table.each { |e| e.reset_panel(@kind) }
       @reset_remain -= 1
     end
   end
@@ -441,7 +441,7 @@ class Field
         break
       end
     end
-    
+
     if maxx - minx >= 3 - 1
       (minx..maxx).each do |x|
         get(x, pos.y).vanish
@@ -466,7 +466,7 @@ class Field
         break
       end
     end
-    
+
     if maxy - miny >= 3 - 1
       (miny..maxy).each do |y|
         get(pos.x, y).vanish
@@ -481,7 +481,7 @@ end
 class Vec2
   attr_accessor :x
   attr_accessor :y
-  
+
   def initialize(x, y)
     @x = x
     @y = y
