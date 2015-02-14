@@ -105,9 +105,9 @@ class Panel
   end
 
   def reset_panel(kind)
-      @kind = rand(kind).to_i
-      @vanished = nil
-      @hide = false
+    @kind = rand(kind).to_i
+    @vanished = nil
+    @hide = false
   end
 end
 
@@ -186,19 +186,19 @@ class Field
   end
 
   def calculate_score(vanish_num, chain)
-      score = 0
+    score = 0
 
-      chain_rate = 1.0
-      2.upto(chain) do
-        chain_rate *= CHAIN_RATE
-      end
+    chain_rate = 1.0
+    2.upto(chain) do
+      chain_rate *= CHAIN_RATE
+    end
 
-      base_score = 100
-      1.upto(vanish_num) do |e|
-        base_score *= BASE_RATE if e > 3
-        score += (base_score * chain_rate / 10).to_i * 10
-      end
-      score
+    base_score = 100
+    1.upto(vanish_num) do |e|
+      base_score *= BASE_RATE if e > 3
+      score += (base_score * chain_rate / 10).to_i * 10
+    end
+    score
   end
 
   def update_fall
@@ -210,7 +210,7 @@ class Field
   end
 
   def update_new_panel
-      if @frame == 0
+    if @frame == 0
       0.upto(X-1) do |x|
         (Y-2).downto(0) do |y|
           if get(x, y+1).vanished?
@@ -223,17 +223,17 @@ class Field
         end
       end
 
-    @table.each { |e| e.new_panel(@kind) }
+      @table.each { |e| e.new_panel(@kind) }
 
     elsif @frame > 5
-    if vanish_all
-      @mode = :blank
-      @frame = 0
-      @chain += 1
-    else
-      @mode = :touch
-      @chain = 0
-    end
+      if vanish_all
+        @mode = :blank
+        @frame = 0
+        @chain += 1
+      else
+        @mode = :touch
+        @chain = 0
+      end
     end
 
     @frame += 1
@@ -298,7 +298,7 @@ class Field
 
   def swap?(a, b)
     abs(a.x - b.x) <= 1 && abs(a.y - b.y) <= 0 ||
-    abs(a.x - b.x) <= 0 && abs(a.y - b.y) <= 1
+      abs(a.x - b.x) <= 0 && abs(a.y - b.y) <= 1
   end
 
   def abs(v)
@@ -464,7 +464,7 @@ class ResetButton
     t = Input.touch(0)
     if t.press?
       if @pos.x <= t.x && t.x <= @pos.x + @size.x &&
-         @pos.y <= t.y && t.y <= @pos.y + @size.y
+          @pos.y <= t.y && t.y <= @pos.y + @size.y
         @field.reset
       end
     end
