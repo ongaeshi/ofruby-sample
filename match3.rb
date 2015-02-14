@@ -224,8 +224,11 @@ class Field
       end
 
       @table.each { |e| e.new_panel(@kind) }
+    end
 
-    elsif @frame > 5
+    @frame += 1
+
+    if @frame > 5
       if vanish_all
         @mode = :blank
         @frame = 0
@@ -235,8 +238,6 @@ class Field
         @chain = 0
       end
     end
-
-    @frame += 1
   end
 
   def get(x, y)
