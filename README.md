@@ -12,6 +12,7 @@ ofruby Sample Code
 - [08: Text Board](#08-text-board)
 - [09: Match3 Game](#09-match3-game)
 - [10: Emoji](#10-emoji)
+- [11: Emoji QUiz](#11-emoji-quiz)
 
 ## 00: Hello
 Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello.rb)
@@ -69,4 +70,9 @@ Disappear as three arranged by replacing the panel. Let's aim high scores! [[src
 Emoji viewer. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/emoji.rb)
 
 ![emoji.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/emoji.png)
+
+## 11: Emoji Quiz
+Emoji Quiz. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/emoji_quiz.rb)
+
+![emoji_quiz.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/emoji_quiz.png)
 
