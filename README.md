@@ -11,6 +11,7 @@ ofruby Sample Code
 - [07: Random Bound](#07-random-bound)
 - [08: Text Board](#08-text-board)
 - [09: Match3 Game](#09-match3-game)
+- [10: Emoji](#10-emoji)
 
 ## 00: Hello
 Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello.rb)
@@ -63,4 +64,9 @@ Any text will scroll from left to right. [[src]](https://github.com/ongaeshi/ofr
 Disappear as three arranged by replacing the panel. Let's aim high scores! [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/match3.rb)
 
 ![match3.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/match3.png)
+
+## 10: Emoji
+Emoji viewer. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/emoji.rb)
+
+![emoji.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/emoji.png)
 
