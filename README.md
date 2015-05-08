@@ -13,6 +13,7 @@ ofruby Sample Code
 - [09: Match3 Game](#09-match3-game)
 - [10: Emoji](#10-emoji)
 - [11: Emoji QUiz](#11-emoji-quiz)
+- [12: Sprite](#12-sprite)
 
 ## 00: Hello
 Hello world. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/hello.rb)
@@ -75,4 +76,10 @@ Emoji viewer. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/emoj
 Emoji Quiz. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/emoji_quiz.rb)
 
 ![emoji_quiz.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/emoji_quiz.png)
+
+## 12: Sprite
+Move the image freely. [[src]](https://github.com/ongaeshi/ofruby-sample/blob/master/sprite.rb)
+
+![sprite.png](https://raw.github.com/ongaeshi/ofruby-sample/master/images/sprite.png)
+
 
